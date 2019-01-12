@@ -1,0 +1,19 @@
+FROM node:6-alpine
+
+# Create feports directory
+RUN mkdir -p /JUnit
+
+# Create a server directory
+RUN mkdir -p /app
+WORKDIR /app
+
+# Install app dependencies
+COPY package.json /app
+RUN npm install
+
+# Copy test source
+COPY test.js /app
+
+EXPOSE 9000
+
+CMD ["npm", "test"]
